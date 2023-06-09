@@ -13,6 +13,9 @@ module.exports = {
         '94': '22rem'
       }
     },
+    fontFamily: {
+      mono: ['Roboto Mono', 'monospace']
+    }
   },
   plugins: [],
 }
