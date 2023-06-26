@@ -1,5 +1,26 @@
-<dic class="max-w-6xl x-auto px-4 py-12">
+<div class="max-w-6xl mx-auto px-4 py-12">
     <div class="flex items-start md:items-end justify-between my-5">
-        <h1 class="text-2xl font-bold text-gray-700">Order {{ order.name }}</h1>
+        <div class="w-1/2">
+            <h1 class="text-2xl font-bold text-gray-700">Order {{ order.name }}</h1>
+            <p class="text-gray-500 my-2">Placed on {{ order.created_at | date: format: "date" }}</p>
+            <span class="text-sm text-white bg-gray-700 rounded-full my-2 px-4 py-1">{{ order.financial_status_label }}</span>
+        </div>
+        <a href="{{ routes.account_url }}" class="text-blue-700hover:text-blue-900 underline font-medium">Back to account</a>
     </div>
-</dic>
+
+    <div>
+        {% for line_item in order.line_items %}
+            <div class="w-full border border-gray-200 divide-y rounded-sm mb-4">
+                <div class="grid grid-cols md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-12 p-4 md:p-12">
+                    <div class="w-full min-h-80 bg-gray-200 rounded-md oberflow-hidden border">
+                        {% if line_item.image %}
+                            <img class="w-full h-full object-center object-cover" src="{{ line_item.image | image_url: width: 100 }}" alt="{{ line_item.image.alt }}">
+                        {% else %}
+                            { 'product-1' | placeholder_svg_tag: "w-full h-full object-center object-cover"}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
